@@ -1,14 +1,34 @@
-import AppDataStore from "./contexts/AppDataStore";
+import { useCallback, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
-import Routers from "./common/Routers";
 import { ToastContainer } from "react-toastify";
+import AppDataStore from "./contexts/AppDataStore";
+import Routers from "./common/Routers";
 import 'react-toastify/dist/ReactToastify.css';
+import { status } from "./api/auth";
 
 function App() {
-  return (
-    <AppDataStore.Provider value={{}}>
-      <BrowserRouter>
+  const [user, setUser] = useState(null);
 
+  const verifySession = useCallback(async () => {
+    try {
+      const res = await status();
+      setUser(res.data);
+    }
+    catch (err) {
+      localStorage.removeItem("session");
+      setUser(null);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("session")) {
+      verifySession();
+    }
+  }, [verifySession]);
+
+  return (
+    <AppDataStore.Provider value={{ user, setUser }}>
+      <BrowserRouter>
         <Routers />
         <ToastContainer
           position="top-right"

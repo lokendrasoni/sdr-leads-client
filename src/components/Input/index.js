@@ -1,4 +1,4 @@
-export default function Input({ key, id, type, placeholder, value, onChange, className="", style, required }) {
+export default function Input({ key, id, type, placeholder, value, onChange, className = "", style, required }) {
     return (
         <input
             key={key}

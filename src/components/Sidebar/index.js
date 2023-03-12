@@ -2,7 +2,7 @@ import React from 'react';
 import { Links } from "../../common/Links";
 import { Link } from "react-router-dom";
 
-export default function Sidebar({ id, className = ""}) {
+export default function Sidebar({ id = "", className = "" }) {
     return (
         <>
             <button onClick={() => { document.querySelector(`#${id}`).classList.toggle("-translate-x-full") }} data-drawer-target={id} data-drawer-toggle={id} aria-controls={id} type="button" className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
@@ -20,13 +20,13 @@ export default function Sidebar({ id, className = ""}) {
                         </svg>
                     </button>
                     <ul className="space-y-2">
-                        { Links.filter(link => link.showInNavigation).map((link, key) => {
+                        {Links.filter(link => link.showInNavigation).map((link, key) => {
                             return (
                                 <li key={key}>
                                     <Link className='flex items-center p-2 text-base font-bold text-gray-900 rounded-lg' to={link.path}>{link.name}</Link>
                                 </li>
                             )
-                        }) }
+                        })}
                     </ul>
                 </div>
             </aside>

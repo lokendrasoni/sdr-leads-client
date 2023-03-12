@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-export class ApiCall {
+export default class ApiCall {
     getLocalToken() {
-        this.accessToken = localStorage.getItem("session") || null;
+        this.accessToken = localStorage.getItem("token") || null;
     }
 
     async request(method, url, body) {
@@ -12,11 +12,11 @@ export class ApiCall {
     
             const options = {
                 headers: {
-                    Authorization: this.accessToken,
-                    method,
-                    url,
-                    data: body || undefined
-                }
+                    Authorization: this.accessToken
+                },
+                method,
+                url,
+                data: body || undefined
             };
 
             const data = await axios(options);
@@ -33,11 +33,9 @@ export class ApiCall {
     async requestPublic(method, url, body) {
         try {
             const options = {
-                headers: {
-                    method,
-                    url,
-                    data: body || undefined
-                }
+                method,
+                url,
+                data: body || undefined
             };
 
             const data = await axios(options);

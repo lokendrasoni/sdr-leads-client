@@ -9,22 +9,22 @@ import { status } from "./api/auth";
 function App() {
   const [user, setUser] = useState(null);
 
-  const verifySession = useCallback(async () => {
+  const verifyToken = useCallback(async () => {
     try {
       const res = await status();
       setUser(res.data);
     }
     catch (err) {
-      localStorage.removeItem("session");
+      localStorage.removeItem("token");
       setUser(null);
     }
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem("session")) {
-      verifySession();
+    if (localStorage.getItem("token")) {
+      verifyToken();
     }
-  }, [verifySession]);
+  }, [verifyToken]);
 
   return (
     <AppDataStore.Provider value={{ user, setUser }}>

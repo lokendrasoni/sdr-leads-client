@@ -17,7 +17,6 @@ export default function Login() {
 
     try {
       const token = await login(username, password);
-      console.log(token)
       localStorage.setItem("token", token.data);
 
       const user = await status();

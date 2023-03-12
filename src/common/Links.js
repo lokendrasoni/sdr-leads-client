@@ -1,5 +1,6 @@
 import Error404 from "../components/Error404";
 import Home from "../ui/Home";
+import Dashboard from "../ui/Dashboard/Home";
 
 export const Links = [
     {
@@ -7,6 +8,12 @@ export const Links = [
         path: "/",
         element: <Home />,
         showInNavigation: false
+    },
+    {
+        name: "Dashboard",
+        path: "/",
+        element: <Dashboard />,
+        showInNavigation: true
     },
     {
         name: "Error404",
